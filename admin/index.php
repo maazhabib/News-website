@@ -3,8 +3,9 @@
 include("config.php");
 session_start();
 if(isset($_SESSION['username'])){
-  header("location : post.php");
+    header("location: post.php");
 }
+
 
 
 if(isset($_POST['login'])){
@@ -15,15 +16,16 @@ if(isset($_POST['login'])){
     $sql = "SELECT user_id ,username , role FROM user WHERE username = '{$user}' AND password = '{$password}' ";
     $result = mysqli_query($conn , $sql);
 
-if(mysqli_num_rows($result) > 0){
-    while( $row = mysqli_fetch_assoc($result)){
-        session_start();
-        $_SESSION['username'] = $row['username'];
-        $_SESSION['user_id'] = $row['user_id'];
-        $_SESSION['user_role'] = $row['role'];
-        header("location: post.php");
+    if(mysqli_num_rows($result) > 0){
+        session_start();    
+        while( $row = mysqli_fetch_assoc($result)){
+            $_SESSION['username'] = $row['username'];
+            $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['user_role'] = $row['role'];
+            header("location: post.php");
+        }
     }
-}
+    
 }
 
 ?>

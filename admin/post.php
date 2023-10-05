@@ -16,10 +16,13 @@ if(isset($_GET['page'])){
   if($_SESSION['user_role'] == 1){
     
    
-  $Fetch_data= "SELECT post.post_id , post.title , post.description , post.post_date ,category.category_name,category.category_id , user.username FROM post 
-  LEFT JOIN category ON post.category = category.category_id
-  LEFT JOIN user ON post.author = user.user_id
-  ORDER BY post.post_id DESC LIMIT $start, $per_page ";
+    $Fetch_data = "SELECT post.post_id, post.title, post.description, post.post_date, category.category_name, 
+    category.category_id, user.username, user.role 
+    FROM post 
+    LEFT JOIN category ON post.category = category.category_id
+    LEFT JOIN user ON post.author = user.user_id
+    ORDER BY post.post_id DESC LIMIT $start, $per_page";
+
 
   }elseif($_SESSION['user_role'] == 0){
 
@@ -64,12 +67,13 @@ if(isset($_GET['page'])){
                               <td><?php echo $row['category_name']?></td>
                               <td><?php echo $row['post_date']?></td>
                               <td><?php 
-                                if($row['username'] === 1){
-                                    echo 'Admin';
-                                }else{
-                                    echo "Normal";
-                                }
-                                ?></td>
+                                  if($row['role'] == 1){
+                                      echo 'Admin';
+                                  } else {
+                                      echo 'Normal';
+                                  }
+                              ?></td> 
+
                               <td class='edit'><a href='update-post.php?id=<?php echo $row['post_id']?>'><i class='fa fa-edit'></i></a></td>
                               <td class='delete'><a href='delete-post.php?id=<?php echo $row['post_id']?>&cid=<?php echo $row['category_id']?>'><i class='fa fa-trash-o'></i></a></td>
                               
