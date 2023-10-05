@@ -12,4 +12,4 @@ if($Dlt_result){
     header("location: users.php");
 }
 
-?>
+?>  

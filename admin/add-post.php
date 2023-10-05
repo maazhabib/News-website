@@ -5,7 +5,7 @@ if (isset($_POST['submit'])) {
     $post_title = $_POST['post_title'];
     $postdesc = $_POST['postdesc'];
     $category = $_POST['category'];
-    $date = date("Y-m-d H:i:s");
+    $date = date("Y-m-d");
     $author = $_SESSION['user_id'];
 
     $image = $_FILES['fileToUpload'];
